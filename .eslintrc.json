@@ -1,7 +1,9 @@
 {
   "extends": ["next/core-web-vitals", "next/typescript", "prettier"],
+  "plugins": ["n"],
   "rules": {
     "semi": ["error"],
-    "quotes": ["error", "double"]
+    "quotes": ["error", "double"],
+    "n/no-process-env": ["error"]
   }
 }
