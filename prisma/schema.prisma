@@ -13,32 +13,27 @@ model Admin {
 }
 
 model Client {
-  id      String @id @default(uuid())
-  name    String
-  phone   String @unique
-  email   String @unique
-  address String
-
-  orders Order[]
-
-  adminId String?
-  Admin   Admin?  @relation(fields: [adminId], references: [id], onDelete: Cascade)
-
+  id             String   @id @default(uuid())
+  name           String
+  phone          String   @unique
+  email          String   @unique
+  address        String
   onBoardingDate DateTime @default(now())
+  adminId        String?
+  Admin          Admin?   @relation(fields: [adminId], references: [id], onDelete: Cascade)
+  orders         Order[]
 }
 
 model Order {
-  id            String   @id @default(uuid())
-  plan          String
-  amount        String
-  validity      DateTime
-  paymentStatus String
-
-  clientId String?
-  client   Client? @relation(fields: [clientId], references: [id], onDelete: Cascade)
-
+  id                    String   @id @default(uuid())
+  plan                  String
+  amount                String
+  validity              DateTime
+  paymentStatus         String
+  clientId              String?
   orderExpiryDate       DateTime
   orderRegistrationDate DateTime
+  client                Client?  @relation(fields: [clientId], references: [id], onDelete: Cascade)
 
   @@index([clientId])
 }
