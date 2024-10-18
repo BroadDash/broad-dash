@@ -8,32 +8,30 @@ datasource db {
 }
 
 model Admin {
-  id     String   @id @default(uuid())
-  client Client[]
+  id String @id @default(uuid())
 }
 
 model Client {
-  id             String   @id @default(uuid())
-  name           String
-  phone          String   @unique
-  email          String   @unique
-  address        String
-  onBoardingDate DateTime @default(now())
-  adminId        String?
-  Admin          Admin?   @relation(fields: [adminId], references: [id], onDelete: Cascade)
-  orders         Order[]
+  id        String   @id @default(uuid())
+  name      String
+  phone     String   @unique
+  email     String   @unique
+  address   String
+  createdAt DateTime @default(now())
+  orders    Order[]
 }
 
 model Order {
-  id                    String   @id @default(uuid())
-  plan                  String
-  amount                String
-  validity              DateTime
-  paymentStatus         String
-  clientId              String?
-  orderExpiryDate       DateTime
-  orderRegistrationDate DateTime
-  client                Client?  @relation(fields: [clientId], references: [id], onDelete: Cascade)
+  id             String   @id @default(uuid())
+  clientId       String?
+  plan           String
+  amount         String
+  validity       DateTime
+  paymentStatus  String
+  createdAt      DateTime @default(now())
+  activationDate DateTime
+  expiryDate     DateTime
+  client         Client?  @relation(fields: [clientId], references: [id], onDelete: Cascade)
 
   @@index([clientId])
 }
