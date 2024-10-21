@@ -16,7 +16,7 @@ export async function createClient(unsafeData: z.infer<typeof clientSchema>) {
     return { error: true, message: "There was an error creating Client." };
   }
 
-  const { clientId } = await createClientDb(data);
+  const { id } = await createClientDb(data);
   // once client is created redirect to /client/${clientId} no need to return anything as error is already handled above
-  redirect(`/client/${clientId}`);
+  redirect(`/client/${id}`);
 }
