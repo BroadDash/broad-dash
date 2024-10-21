@@ -13,10 +13,11 @@ model Admin {
 
 model Client {
   id        String   @id @default(uuid())
+  clientId  String?
   name      String
-  phone     String   @unique
-  email     String   @unique
-  address   String
+  phone     String?  @unique
+  email     String?  @unique
+  address   String?
   createdAt DateTime @default(now())
   orders    Order[]
 }
