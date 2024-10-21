@@ -18,7 +18,6 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import {
   Popover,
   PopoverContent,
@@ -163,8 +162,7 @@ export function OrderForm() {
                 </PopoverContent>
               </Popover>
               <FormDescription>
-                Choose the date you want your plan to start. You can select up
-                to one year in advance.
+                Choose the date you want your plan to start.
               </FormDescription>
               <FormMessage />
             </FormItem>
@@ -179,9 +177,6 @@ export function OrderForm() {
               <FormControl>
                 <Input placeholder="" {...field} />
               </FormControl>
-              <FormDescription>
-                This is your public display name.
-              </FormDescription>
               <FormMessage />
             </FormItem>
           )}
@@ -191,7 +186,7 @@ export function OrderForm() {
           name="paymentStatus"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Internet Speed</FormLabel>
+              <FormLabel>Payment Status</FormLabel>
               <Select onValueChange={field.onChange} defaultValue={field.value}>
                 <FormControl>
                   <SelectTrigger>
@@ -201,14 +196,13 @@ export function OrderForm() {
                 <SelectContent>
                   <SelectItem value="Paid">Paid</SelectItem>
                   <SelectItem value="Unpaid">Unpaid</SelectItem>
-                  <SelectItem value="Pai">Pai Months</SelectItem>
+                  <SelectItem value="Partially Paid">Partially Paid</SelectItem>
                 </SelectContent>
               </Select>
               <FormMessage />
             </FormItem>
           )}
         />
-
         <Button type="submit">Submit</Button>
       </form>
     </Form>
