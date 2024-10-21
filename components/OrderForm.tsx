@@ -1,5 +1,3 @@
 export const OrderForm = () => {
-  return (
-    <div>OrderForm</div>
-  );
+  return <div>OrderForm</div>;
 };
