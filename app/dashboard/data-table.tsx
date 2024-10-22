@@ -22,9 +22,11 @@ import {
   DropdownMenu,
   DropdownMenuCheckboxItem,
   DropdownMenuContent,
+  DropdownMenuLabel,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Input } from "@/components/ui/input";
+import { Separator } from "@/components/ui/separator";
 import {
   Table,
   TableBody,
@@ -71,10 +73,10 @@ export function DataTable<TData, TValue>({
   });
 
   return (
-    <div>
-      <div className="flex items-center justify-end py-4">
+    <div className="">
+      <div className="flex items-center justify-end p-4">
         <Input
-          placeholder="Filter emails..."
+          placeholder="Search by email ..."
           value={
             (table.getColumn("email")?.getFilterValue() as string) ??
             (table.getColumn("name")?.getFilterValue() as string) ??
@@ -84,7 +86,7 @@ export function DataTable<TData, TValue>({
             table.getColumn("email")?.setFilterValue(event.target.value) ??
             table.getColumn("name")?.setFilterValue(event.target.value)
           }
-          className="max-w-sm"
+          className="w-1/2"
         />
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
@@ -93,6 +95,8 @@ export function DataTable<TData, TValue>({
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
+            <DropdownMenuLabel>Columns</DropdownMenuLabel>
+            <Separator />
             {table
               .getAllColumns()
               .filter((column) => column.getCanHide())
@@ -113,9 +117,9 @@ export function DataTable<TData, TValue>({
           </DropdownMenuContent>
         </DropdownMenu>
       </div>
-      <div className="flex rounded-md border">
+      <div className="flex rounded-none border">
         <Table>
-          <TableHeader>
+          <TableHeader className="">
             {table.getHeaderGroups().map((headerGroup) => (
               <TableRow key={headerGroup.id}>
                 {headerGroup.headers.map((header) => {
@@ -133,7 +137,7 @@ export function DataTable<TData, TValue>({
               </TableRow>
             ))}
           </TableHeader>
-          <TableBody>
+          <TableBody className="h-64 overflow-auto">
             {table.getRowModel().rows?.length ? (
               table.getRowModel().rows.map((row) => (
                 <TableRow
@@ -163,7 +167,7 @@ export function DataTable<TData, TValue>({
           </TableBody>
         </Table>
       </div>
-      <div className="flex items-center justify-end space-x-2 py-4">
+      <div className="w-full space-x-2 py-4">
         <DataTablePagination table={table} />
       </div>
     </div>
