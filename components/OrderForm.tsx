@@ -34,13 +34,24 @@ import {
 } from "@/components/ui/select";
 import { cn } from "@/lib/utils";
 import { orderFormSchema } from "@/schema/order";
-import { createOrder } from "@/server/actions/order";
+import { createOrder, updateOrder } from "@/server/actions/order";
 
-export function OrderForm() {
+export function OrderForm({
+  initialData = {
+    plan: null,
+    validity: null,
+    activationDate: null,
+    amount: "",
+    paymentStatus: null,
+  },
+}: {
+  initialData: z.infer<typeof orderFormSchema>;
+}) {
   const [isCalendarOpen, setIsCalendarOpen] = useState(false);
-
+  const isEdit = initialData.plan !== null;
   const form = useForm<z.infer<typeof orderFormSchema>>({
     resolver: zodResolver(orderFormSchema),
+    defaultValues: initialData,
   });
 
   async function onSubmit(formData: z.infer<typeof orderFormSchema>) {
@@ -60,8 +71,20 @@ export function OrderForm() {
         plan,
         validity,
       };
-      const value = await createOrder(data);
-      console.log(value);
+      let value = null;
+      if (isEdit) {
+        value = await updateOrder(data);
+      } else {
+        value = await createOrder(data);
+      }
+      console.log("returned from action:", value);
+      form.reset({
+        plan: null,
+        validity: null,
+        activationDate: null,
+        amount: "",
+        paymentStatus: null,
+      });
     } catch (error) {
       console.log({
         title: "Error",
@@ -82,7 +105,13 @@ export function OrderForm() {
               <Select onValueChange={field.onChange} defaultValue={field.value}>
                 <FormControl>
                   <SelectTrigger>
-                    <SelectValue placeholder="Select plan" />
+                    <SelectValue>
+                      <span
+                        className={cn(!field.value && "text-muted-foreground")}
+                      >
+                        {field.value ? field.value : "Select plan"}
+                      </span>
+                    </SelectValue>
                   </SelectTrigger>
                 </FormControl>
                 <SelectContent>
@@ -110,7 +139,13 @@ export function OrderForm() {
               <Select onValueChange={field.onChange} defaultValue={field.value}>
                 <FormControl>
                   <SelectTrigger>
-                    <SelectValue placeholder="Select validity" />
+                    <SelectValue>
+                      <span
+                        className={cn(!field.value && "text-muted-foreground")}
+                      >
+                        {field.value ? field.value : "Select validity"}
+                      </span>
+                    </SelectValue>
                   </SelectTrigger>
                 </FormControl>
                 <SelectContent>
@@ -158,9 +193,6 @@ export function OrderForm() {
                         const adjustedDate = new Date(
                           date.getTime() - date.getTimezoneOffset() * 60000
                         );
-                        // field.onChange(
-                        //   adjustedDate.toISOString().split("T")[0]
-                        // );
                         field.onChange(adjustedDate);
                         setIsCalendarOpen(false);
                       }
@@ -176,9 +208,6 @@ export function OrderForm() {
                   />
                 </PopoverContent>
               </Popover>
-              <FormDescription>
-                Choose the date you want your plan to start.
-              </FormDescription>
               <FormMessage />
             </FormItem>
           )}
@@ -190,7 +219,11 @@ export function OrderForm() {
             <FormItem>
               <FormLabel>Amount</FormLabel>
               <FormControl>
-                <Input placeholder="" {...field} value={field.value ?? ""} />
+                <Input
+                  placeholder="Enter amount"
+                  {...field}
+                  value={field.value ?? ""}
+                />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -205,7 +238,13 @@ export function OrderForm() {
               <Select onValueChange={field.onChange} defaultValue={field.value}>
                 <FormControl>
                   <SelectTrigger>
-                    <SelectValue placeholder="Select payment status" />
+                    <SelectValue>
+                      <span
+                        className={cn(!field.value && "text-muted-foreground")}
+                      >
+                        {field.value ? field.value : "Select payment status"}
+                      </span>
+                    </SelectValue>
                   </SelectTrigger>
                 </FormControl>
                 <SelectContent>
@@ -218,7 +257,9 @@ export function OrderForm() {
             </FormItem>
           )}
         />
-        <Button type="submit">Submit</Button>
+        <Button type="submit">
+          {isEdit ? "Update Order" : "Create Order"}
+        </Button>
       </form>
     </Form>
   );

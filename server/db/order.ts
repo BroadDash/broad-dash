@@ -14,3 +14,17 @@ export async function createOrder(data: z.infer<typeof orderServerSchema>) {
     throw new Error("Failed to create order.");
   }
 }
+
+export async function updateOrder(data: z.infer<typeof orderServerSchema>) {
+  console.log("updating order");
+  return data;
+  // try {
+  //   const value = await db.order.create({
+  //     data,
+  //   });
+  //   return value;
+  // } catch (error) {
+  //   console.error("Error details:", error);
+  //   throw new Error("Failed to create order.");
+  // }
+}
