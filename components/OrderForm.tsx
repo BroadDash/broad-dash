@@ -33,26 +33,33 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { cn } from "@/lib/utils";
-import { orderSchema } from "@/schema/order";
+import { orderFormSchema } from "@/schema/order";
 import { createOrder } from "@/server/actions/order";
 
 export function OrderForm() {
   const [isCalendarOpen, setIsCalendarOpen] = useState(false);
 
-  const form = useForm<z.infer<typeof orderSchema>>({
-    resolver: zodResolver(orderSchema),
-    // defaultValues: {
-    //   plan: null,
-    //   validity: null,
-    //   activationDate: "",
-    //   amount: "",
-    //   paymentStatus: null,
-    // },
+  const form = useForm<z.infer<typeof orderFormSchema>>({
+    resolver: zodResolver(orderFormSchema),
   });
 
-  async function onSubmit(values: z.infer<typeof orderSchema>) {
+  async function onSubmit(values: z.infer<typeof orderFormSchema>) {
     try {
-      await createOrder(values);
+      const { activationDate, validity, amount, paymentStatus, plan } = values;
+      const expiryDate = new Date(activationDate);
+      expiryDate.setMonth(expiryDate.getMonth() + parseInt(validity));
+      // get clientId from pathname
+      const clientId = "01361021-bb32-47ee-bdc1-1f7cae2d8378";
+      const data = {
+        clientId,
+        activationDate,
+        expiryDate,
+        amount,
+        paymentStatus,
+        plan,
+        validity,
+      };
+      await createOrder(data);
     } catch (error) {
       console.log({
         title: "Error",
@@ -69,11 +76,11 @@ export function OrderForm() {
           name="plan"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Internet Speed</FormLabel>
+              <FormLabel>Internet plan</FormLabel>
               <Select onValueChange={field.onChange} defaultValue={field.value}>
                 <FormControl>
                   <SelectTrigger>
-                    <SelectValue placeholder="Select speed" />
+                    <SelectValue placeholder="Select plan" />
                   </SelectTrigger>
                 </FormControl>
                 <SelectContent>
@@ -149,9 +156,10 @@ export function OrderForm() {
                         const adjustedDate = new Date(
                           date.getTime() - date.getTimezoneOffset() * 60000
                         );
-                        field.onChange(
-                          adjustedDate.toISOString().split("T")[0]
-                        );
+                        // field.onChange(
+                        //   adjustedDate.toISOString().split("T")[0]
+                        // );
+                        field.onChange(adjustedDate);
                         setIsCalendarOpen(false);
                       }
                     }}
