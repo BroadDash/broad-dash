@@ -1,5 +1,7 @@
 "use client";
 
+import { useState } from "react";
+
 import { zodResolver } from "@hookform/resolvers/zod";
 import { format } from "date-fns";
 import { Calendar as CalendarIcon } from "lucide-react";
@@ -35,14 +37,16 @@ import { orderSchema } from "@/schema/order";
 import { createOrder } from "@/server/actions/order";
 
 export function OrderForm() {
+  const [isCalendarOpen, setIsCalendarOpen] = useState(false);
+
   const form = useForm<z.infer<typeof orderSchema>>({
     resolver: zodResolver(orderSchema),
     // defaultValues: {
-    //   plan: "100 Mbps Unlimited",
-    //   validity: "1",
+    //   plan: null,
+    //   validity: null,
     //   activationDate: "",
     //   amount: "",
-    //   paymentStatus: "Unpaid",
+    //   paymentStatus: null,
     // },
   });
 
@@ -93,7 +97,7 @@ export function OrderForm() {
           name="validity"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Internet Speed</FormLabel>
+              <FormLabel>Validity</FormLabel>
               <Select onValueChange={field.onChange} defaultValue={field.value}>
                 <FormControl>
                   <SelectTrigger>
@@ -117,7 +121,7 @@ export function OrderForm() {
           render={({ field }) => (
             <FormItem className="flex flex-col">
               <FormLabel>Activation Date</FormLabel>
-              <Popover>
+              <Popover open={isCalendarOpen} onOpenChange={setIsCalendarOpen}>
                 <PopoverTrigger asChild>
                   <FormControl>
                     <Button
@@ -136,7 +140,7 @@ export function OrderForm() {
                     </Button>
                   </FormControl>
                 </PopoverTrigger>
-                <PopoverContent className="w-auto p-0" align="start">
+                <PopoverContent className="w-auto p-0" align="end">
                   <Calendar
                     mode="single"
                     selected={field.value ? new Date(field.value) : undefined}
@@ -148,6 +152,7 @@ export function OrderForm() {
                         field.onChange(
                           adjustedDate.toISOString().split("T")[0]
                         );
+                        setIsCalendarOpen(false);
                       }
                     }}
                     disabled={(date) =>
