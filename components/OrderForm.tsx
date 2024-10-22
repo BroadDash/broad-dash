@@ -43,9 +43,10 @@ export function OrderForm() {
     resolver: zodResolver(orderFormSchema),
   });
 
-  async function onSubmit(values: z.infer<typeof orderFormSchema>) {
+  async function onSubmit(formData: z.infer<typeof orderFormSchema>) {
     try {
-      const { activationDate, validity, amount, paymentStatus, plan } = values;
+      const { activationDate, validity, amount, paymentStatus, plan } =
+        formData;
       const expiryDate = new Date(activationDate);
       expiryDate.setMonth(expiryDate.getMonth() + parseInt(validity));
       // get clientId from pathname
@@ -59,7 +60,8 @@ export function OrderForm() {
         plan,
         validity,
       };
-      await createOrder(data);
+      const value = await createOrder(data);
+      console.log(value);
     } catch (error) {
       console.log({
         title: "Error",
@@ -188,7 +190,7 @@ export function OrderForm() {
             <FormItem>
               <FormLabel>Amount</FormLabel>
               <FormControl>
-                <Input placeholder="" {...field} />
+                <Input placeholder="" {...field} value={field.value ?? ""} />
               </FormControl>
               <FormMessage />
             </FormItem>

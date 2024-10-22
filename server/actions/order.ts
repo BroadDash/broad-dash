@@ -15,7 +15,6 @@ export async function createOrder(
   if (!success || userId == null) {
     return { error: true, message: "There was an error creating Client." };
   }
-
   const value = await createOrderDb(data);
-  console.log("created sucessfully :", value);
+  return value;
 }

@@ -8,7 +8,6 @@ await jiti.import("./env/server.ts");
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   compiler: {
-    styledComponents: true,
   },
 };
 
