@@ -13,7 +13,6 @@ import { Calendar } from "@/components/ui/calendar";
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -62,7 +61,7 @@ export function OrderForm({
       expiryDate.setMonth(expiryDate.getMonth() + parseInt(validity));
       // get clientId from pathname
       const clientId = "01361021-bb32-47ee-bdc1-1f7cae2d8378";
-      const data = {
+      let data = {
         clientId,
         activationDate,
         expiryDate,
@@ -73,6 +72,8 @@ export function OrderForm({
       };
       let value = null;
       if (isEdit) {
+        const orderId = "2252c5a7-9dd5-45bc-b413-a2b04e565d1a";
+        data = { ...data, id: orderId };
         value = await updateOrder(data);
       } else {
         value = await createOrder(data);

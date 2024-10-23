@@ -3,17 +3,17 @@
 import { auth } from "@clerk/nextjs/server";
 import { z } from "zod";
 
-import { orderServerSchema } from "@/schema/order";
+import { createOrderSchema, updateOrderSchema } from "@/schema/order";
 import {
   createOrder as createOrderDb,
   updateOrder as updateOrderDb,
 } from "@/server/db/order";
 
 export async function createOrder(
-  unsafeData: z.infer<typeof orderServerSchema>
+  unsafeData: z.infer<typeof createOrderSchema>
 ) {
   const { userId } = auth();
-  const { success, data } = orderServerSchema.safeParse(unsafeData);
+  const { success, data } = createOrderSchema.safeParse(unsafeData);
 
   if (!success || userId == null) {
     return { error: true, message: "There was an error creating Client." };
@@ -23,10 +23,10 @@ export async function createOrder(
 }
 
 export async function updateOrder(
-  unsafeData: z.infer<typeof orderServerSchema>
+  unsafeData: z.infer<typeof updateOrderSchema>
 ) {
   const { userId } = auth();
-  const { success, data } = orderServerSchema.safeParse(unsafeData);
+  const { success, data } = updateOrderSchema.safeParse(unsafeData);
 
   if (!success || userId == null) {
     return { error: true, message: "There was an error creating Client." };
