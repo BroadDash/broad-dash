@@ -37,10 +37,14 @@ import { createOrder, updateOrder } from "@/server/actions/order";
 
 export function OrderForm({
   initialData = {
+    // @ts-expect-error: Allow null values for initial form data
     plan: null,
+    // @ts-expect-error: Allow null values for initial form data
     validity: null,
+    // @ts-expect-error: Allow null values for initial form data
     activationDate: null,
     amount: "",
+    // @ts-expect-error: Allow null values for initial form data
     paymentStatus: null,
   },
 }: {
@@ -61,7 +65,7 @@ export function OrderForm({
       expiryDate.setMonth(expiryDate.getMonth() + parseInt(validity));
       // get clientId from pathname
       const clientId = "01361021-bb32-47ee-bdc1-1f7cae2d8378";
-      let data = {
+      const data = {
         clientId,
         activationDate,
         expiryDate,
@@ -73,19 +77,22 @@ export function OrderForm({
       let value = null;
       if (isEdit) {
         const orderId = "2252c5a7-9dd5-45bc-b413-a2b04e565d1a";
-        data = { ...data, id: orderId };
-        value = await updateOrder(data);
+        const updateData = { ...data, id: orderId };
+        value = await updateOrder(updateData);
       } else {
         value = await createOrder(data);
       }
       console.log("returned from action:", value);
-      form.reset({
-        plan: null,
-        validity: null,
-        activationDate: null,
-        amount: "",
-        paymentStatus: null,
-      });
+      form.reset(
+        // @ts-expect-error: Allow null values for initial form data
+        {
+          plan: null,
+          validity: null,
+          activationDate: null,
+          amount: "",
+          paymentStatus: null,
+        }
+      );
     } catch (error) {
       console.log({
         title: "Error",
@@ -93,7 +100,6 @@ export function OrderForm({
       });
     }
   }
-
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="w-1/3 space-y-6">
