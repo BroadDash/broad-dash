@@ -48,7 +48,7 @@ export function OrderForm({
     paymentStatus: null,
   },
 }: {
-  initialData: z.infer<typeof orderFormSchema>;
+  initialData?: z.infer<typeof orderFormSchema>;
 }) {
   const [isCalendarOpen, setIsCalendarOpen] = useState(false);
   const isEdit = initialData.plan !== null;
@@ -150,7 +150,9 @@ export function OrderForm({
                       <span
                         className={cn(!field.value && "text-muted-foreground")}
                       >
-                        {field.value ? field.value : "Select validity"}
+                        {field.value
+                          ? `${field.value} Months`
+                          : "Select validity"}
                       </span>
                     </SelectValue>
                   </SelectTrigger>

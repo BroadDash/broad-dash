@@ -28,3 +28,15 @@ export async function updateOrder(data: z.infer<typeof updateOrderSchema>) {
     throw new Error("Failed to update order.");
   }
 }
+
+export async function getOrders(clientId: string) {
+  try {
+    const orders = await db.order.findMany({
+      where: { clientId },
+    });
+    return orders;
+  } catch (error) {
+    console.error("Failed to get orders:", error);
+    throw new Error("Failed to get orders.");
+  }
+}
