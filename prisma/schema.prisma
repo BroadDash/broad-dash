@@ -24,15 +24,15 @@ model Client {
 
 model Order {
   id             String   @id @default(uuid())
-  clientId       String?
+  clientId       String
+  client         Client?  @relation(fields: [clientId], references: [id], onDelete: Cascade)
   plan           String
   amount         String
-  validity       DateTime
+  validity       String
   paymentStatus  String
   createdAt      DateTime @default(now())
   activationDate DateTime
   expiryDate     DateTime
-  client         Client?  @relation(fields: [clientId], references: [id], onDelete: Cascade)
 
   @@index([clientId])
 }
