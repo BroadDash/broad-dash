@@ -73,7 +73,7 @@ export function DataTable<TData, TValue>({
   });
 
   return (
-    <div className="">
+    <div className="h-full w-full">
       <div className="flex items-center justify-end p-4">
         <Input
           placeholder="Search by email ..."
@@ -117,8 +117,9 @@ export function DataTable<TData, TValue>({
           </DropdownMenuContent>
         </DropdownMenu>
       </div>
-      <div className="flex rounded-none border">
-        <Table>
+      <Separator />
+      <div className="h-[78vh] overflow-auto">
+        <Table className="">
           <TableHeader className="">
             {table.getHeaderGroups().map((headerGroup) => (
               <TableRow key={headerGroup.id}>
@@ -137,10 +138,12 @@ export function DataTable<TData, TValue>({
               </TableRow>
             ))}
           </TableHeader>
-          <TableBody className="h-64 overflow-auto">
+
+          <TableBody className="">
             {table.getRowModel().rows?.length ? (
               table.getRowModel().rows.map((row) => (
                 <TableRow
+                  className=""
                   key={row.id}
                   data-state={row.getIsSelected() && "selected"}
                 >
@@ -167,7 +170,8 @@ export function DataTable<TData, TValue>({
           </TableBody>
         </Table>
       </div>
-      <div className="w-full space-x-2 py-4">
+      <Separator />
+      <div className="py-4">
         <DataTablePagination table={table} />
       </div>
     </div>
