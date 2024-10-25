@@ -16,7 +16,6 @@ import {
 } from "@tanstack/react-table";
 import { Settings2 } from "lucide-react";
 
-import { DataTablePagination } from "@/components/clientTable/table-pagination";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -70,10 +69,15 @@ export function DataTable<TData, TValue>({
       columnVisibility,
       rowSelection,
     },
+    initialState: {
+      pagination: {
+        pageSize: 14,
+      },
+    },
   });
 
   return (
-    <div className="h-full w-full">
+    <div className="h-full w-screen">
       <div className="flex items-center justify-end p-4">
         <Input
           placeholder="Search by email ..."
@@ -118,7 +122,7 @@ export function DataTable<TData, TValue>({
         </DropdownMenu>
       </div>
       <Separator />
-      <div className="h-[78vh] overflow-auto">
+      <div className="h-[77vh] overflow-hidden">
         <Table className="">
           <TableHeader className="">
             {table.getHeaderGroups().map((headerGroup) => (
@@ -159,10 +163,7 @@ export function DataTable<TData, TValue>({
               ))
             ) : (
               <TableRow>
-                <TableCell
-                  colSpan={columns.length}
-                  className="h-24 text-center"
-                >
+                <TableCell colSpan={columns.length} className="text-center">
                   No results.
                 </TableCell>
               </TableRow>
@@ -170,9 +171,23 @@ export function DataTable<TData, TValue>({
           </TableBody>
         </Table>
       </div>
-      <Separator />
-      <div className="py-4">
-        <DataTablePagination table={table} />
+      <div className="flex items-center justify-end space-x-2 border-t bg-black p-5">
+        <Button
+          variant="outline"
+          size="sm"
+          onClick={() => table.previousPage()}
+          disabled={!table.getCanPreviousPage()}
+        >
+          Previous
+        </Button>
+        <Button
+          variant="outline"
+          size="sm"
+          onClick={() => table.nextPage()}
+          disabled={!table.getCanNextPage()}
+        >
+          Next
+        </Button>
       </div>
     </div>
   );

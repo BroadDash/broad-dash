@@ -93,102 +93,208 @@ async function getData(): Promise<Payment[]> {
     },
     {
       id: "728ed52f",
-      name: "Adithya",
+      name: "asdiofgasdfgu as;",
       amount: 100,
       status: "pending",
       email: "m@example.com",
     },
     {
       id: "728ed52f",
-      name: "Adithya",
+      name: "sdfgsdgjrsyfukl",
       amount: 100,
       status: "pending",
       email: "m@example.com",
     },
     {
       id: "728ed52f",
-      name: "Adithya",
+      name: "Aeftgwert dfthya",
       amount: 100,
       status: "pending",
       email: "m@example.com",
     },
     {
       id: "728ed52f",
-      name: "Adithya",
+      name: "fghjfghjfghj",
       amount: 100,
       status: "pending",
       email: "m@example.com",
     },
     {
       id: "728ed52f",
-      name: "Adithya",
+      name: "asdfasdf",
       amount: 100,
       status: "pending",
       email: "m@example.com",
     },
     {
       id: "728ed52f",
-      name: "Adithya",
+      name: "dsafasdfasdf",
       amount: 100,
       status: "pending",
       email: "m@example.com",
     },
     {
       id: "728ed52f",
-      name: "Adithya",
+      name: "asdihnasd a",
       amount: 100,
       status: "pending",
       email: "m@example.com",
     },
     {
       id: "728ed52f",
-      name: "Adithya",
+      name: "Vardhan",
       amount: 100,
       status: "pending",
       email: "m@example.com",
     },
     {
       id: "728ed52f",
-      name: "Adithya",
+      name: "sdfgsdgjrsyfukl",
       amount: 100,
       status: "pending",
       email: "m@example.com",
     },
     {
       id: "728ed52f",
-      name: "Adithya",
+      name: "Aeftgwert dfthya",
       amount: 100,
       status: "pending",
       email: "m@example.com",
     },
     {
       id: "728ed52f",
-      name: "Adithya",
+      name: "fghjfghjfghj",
       amount: 100,
       status: "pending",
       email: "m@example.com",
     },
     {
       id: "728ed52f",
-      name: "Adithya",
+      name: "asdfasdf",
       amount: 100,
       status: "pending",
       email: "m@example.com",
     },
     {
       id: "728ed52f",
-      name: "Adithya",
+      name: "dsafasdfasdf",
       amount: 100,
       status: "pending",
       email: "m@example.com",
     },
     {
       id: "728ed52f",
-      name: "Adithya",
+      name: "asdihnasd a",
       amount: 100,
       status: "pending",
       email: "m@example.com",
     },
+    {
+      id: "728ed52f",
+      name: "Vardhan",
+      amount: 100,
+      status: "pending",
+      email: "m@example.com",
+    },
+    {
+      id: "728ed52f",
+      name: "sdfgsdgjrsyfukl",
+      amount: 100,
+      status: "pending",
+      email: "m@example.com",
+    },
+    {
+      id: "728ed52f",
+      name: "Aeftgwert dfthya",
+      amount: 100,
+      status: "pending",
+      email: "m@example.com",
+    },
+    {
+      id: "728ed52f",
+      name: "fghjfghjfghj",
+      amount: 100,
+      status: "pending",
+      email: "m@example.com",
+    },
+    {
+      id: "728ed52f",
+      name: "asdfasdf",
+      amount: 100,
+      status: "pending",
+      email: "m@example.com",
+    },
+    {
+      id: "728ed52f",
+      name: "dsafasdfasdf",
+      amount: 100,
+      status: "pending",
+      email: "m@example.com",
+    },
+    {
+      id: "728ed52f",
+      name: "asdihnasd a",
+      amount: 100,
+      status: "pending",
+      email: "m@example.com",
+    },
+    {
+      id: "728ed52f",
+      name: "Vardhan",
+      amount: 100,
+      status: "pending",
+      email: "m@example.com",
+    },
+    {
+      id: "728ed52f",
+      name: "sdfgsdgjrsyfukl",
+      amount: 100,
+      status: "pending",
+      email: "m@example.com",
+    },
+    {
+      id: "728ed52f",
+      name: "Aeftgwert dfthya",
+      amount: 100,
+      status: "pending",
+      email: "m@example.com",
+    },
+    {
+      id: "728ed52f",
+      name: "fghjfghjfghj",
+      amount: 100,
+      status: "pending",
+      email: "m@example.com",
+    },
+    {
+      id: "728ed52f",
+      name: "asdfasdf",
+      amount: 100,
+      status: "pending",
+      email: "m@example.com",
+    },
+    {
+      id: "728ed52f",
+      name: "dsafasdfasdf",
+      amount: 100,
+      status: "pending",
+      email: "m@example.com",
+    },
+    {
+      id: "728ed52f",
+      name: "asdihnasd a",
+      amount: 100,
+      status: "pending",
+      email: "m@example.com",
+    },
+    {
+      id: "728ed52f",
+      name: "Vardhan",
+      amount: 100,
+      status: "pending",
+      email: "m@example.com",
+    },
+
     // ...
   ];
 }
@@ -197,7 +303,7 @@ export default async function DashboardPage() {
   const data = await getData();
 
   return (
-    <div className="w-full">
+    <div className="w-screen">
       <div className="mx-6 flex h-16 items-center justify-between">
         <h1 className="text-lg font-semibold">Clients</h1>
         <Button className="text-sm" size="sm">
@@ -205,7 +311,7 @@ export default async function DashboardPage() {
         </Button>
       </div>
       <Separator />
-      <div className="w-full">
+      <div className="">
         <DataTable columns={columns} data={data} />
       </div>
     </div>
