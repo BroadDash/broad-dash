@@ -197,7 +197,7 @@ export default async function DashboardPage() {
   const data = await getData();
 
   return (
-    <div className="">
+    <div className="w-full">
       <div className="mx-6 flex h-16 items-center justify-between">
         <h1 className="text-lg font-semibold">Clients</h1>
         <Button className="text-sm" size="sm">
