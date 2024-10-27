@@ -34,17 +34,14 @@ function InfoRow({
   );
 }
 
-export default function ClientCard(
-  { name, clientId, phone, email, address, createdAt }: ClientCardProps = {
-    id: "",
-    clientId: "",
-    name: "",
-    phone: "",
-    email: "",
-    address: "",
-    createdAt: "",
-  }
-) {
+export default function ClientCard({
+  name,
+  clientId,
+  phone,
+  email,
+  address,
+  createdAt,
+}: ClientCardProps) {
   return (
     <Card className="w-full max-w-md">
       <CardHeader>
