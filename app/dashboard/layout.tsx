@@ -10,7 +10,7 @@ import {
 const ClientTableLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <div className="flex h-screen w-screen overflow-auto">
-      <SidebarProvider defaultOpen>
+      <SidebarProvider open>
         <AppSidebar />
         <main className="w-full">{children}</main>
       </SidebarProvider>

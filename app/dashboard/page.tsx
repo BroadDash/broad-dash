@@ -307,8 +307,8 @@ export default async function DashboardPage() {
     <div>
       <div className="ml-4 mr-6 flex h-16 items-center justify-between">
         <div className="flex items-center justify-between">
-          <SidebarTrigger className="mr-2 lg:hidden" />
-          <h1 className="font-semibold lg:text-lg">Clients</h1>
+          <SidebarTrigger className="mr-2 md:hidden" />
+          <h1 className="font-semibold md:text-lg">Clients</h1>
         </div>
         <Button className="text-sm" size="sm">
           Create client
