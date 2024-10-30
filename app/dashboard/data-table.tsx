@@ -77,7 +77,7 @@ export function DataTable<TData, TValue>({
   });
 
   return (
-    <div className="w-screen">
+    <div className="">
       <div className="flex items-center justify-end p-4">
         <Input
           placeholder="Search by email ..."
