@@ -19,14 +19,14 @@ import {
 // This type is used to define the shape of our data.
 // You can use a Zod schema here if you want.
 export type Clients = {
-  id: string;
+  ispId: string;
   name: string;
-  email: string;
-  phone: string;
-  amount?: number;
-  clientId: string;
-  address: string;
-  status: "pending" | "processing" | "success" | "failed";
+  clientId: string | null;
+  phone: string | null;
+  email: string | null;
+  address: string | null;
+  id: string;
+  createdAt: Date;
 };
 
 export const columns: ColumnDef<Clients>[] = [
