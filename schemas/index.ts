@@ -1,6 +1,12 @@
-import { z } from "zod";
+import * as z from "zod";
 
-export const clientSchema = z.object({
+export const IspSchema = z.object({
+  name: z.string().min(1, {
+    message: "Please enter a ISP name",
+  }),
+});
+
+export const ClientSchema = z.object({
   name: z.string().min(2, {
     message: "Name must be at least 2 characters.",
   }),
@@ -11,4 +17,5 @@ export const clientSchema = z.object({
     .optional(),
   email: z.string().email().optional(),
   address: z.string().optional(),
+  ispId: z.string().optional(),
 });

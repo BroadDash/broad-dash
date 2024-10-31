@@ -18,15 +18,18 @@ import {
 
 // This type is used to define the shape of our data.
 // You can use a Zod schema here if you want.
-export type Payment = {
+export type Clients = {
   id: string;
   name: string;
   email: string;
-  amount: number;
+  phone: string;
+  amount?: number;
+  clientId: string;
+  address: string;
   status: "pending" | "processing" | "success" | "failed";
 };
 
-export const columns: ColumnDef<Payment>[] = [
+export const columns: ColumnDef<Clients>[] = [
   {
     id: "select",
     header: ({ table }) => (
@@ -50,6 +53,10 @@ export const columns: ColumnDef<Payment>[] = [
     enableHiding: false,
   },
   {
+    accessorKey: "clientId",
+    header: "Client Id",
+  },
+  {
     accessorKey: "name",
     header: "Name",
   },
@@ -60,17 +67,12 @@ export const columns: ColumnDef<Payment>[] = [
     ),
   },
   {
-    accessorKey: "amount",
-    header: () => <div>Amount</div>,
-    cell: ({ row }) => {
-      const amount = parseFloat(row.getValue("amount"));
-      const formatted = new Intl.NumberFormat("en-US", {
-        style: "currency",
-        currency: "INR",
-      }).format(amount);
-
-      return <div className="font-medium">{formatted}</div>;
-    },
+    accessorKey: "phone",
+    header: "Phone",
+  },
+  {
+    accessorKey: "address",
+    header: "Address",
   },
   {
     accessorKey: "status",

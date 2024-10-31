@@ -11,15 +11,23 @@ model Admin {
   id String @id @default(uuid())
 }
 
+model ISP {
+  id      String   @id @default(uuid())
+  name    String
+  clients Client[]
+}
+
 model Client {
   id        String   @id @default(uuid())
   clientId  String?
   name      String
-  phone     String?  @unique
-  email     String?  @unique
+  phone     String? 
+  email     String?  
   address   String?
   createdAt DateTime @default(now())
   orders    Order[]
+  ispId     String
+  isp       ISP?     @relation(fields: [ispId], references: [id], onDelete: Cascade)
 }
 
 model Order {
