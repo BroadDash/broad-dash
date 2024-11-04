@@ -1,5 +1,3 @@
-"use client";
-
 import * as React from "react";
 
 import { Slot } from "@radix-ui/react-slot";
@@ -44,15 +42,6 @@ export interface ButtonProps
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   ({ className, variant, size, asChild = false, ...props }, ref) => {
-    const [isMounted, setIsMounted] = React.useState(false);
-
-    React.useEffect(() => {
-      setIsMounted(true);
-    }, []);
-
-    if (!isMounted) {
-      return null;
-    }
     const Comp = asChild ? Slot : "button";
     return (
       <Comp

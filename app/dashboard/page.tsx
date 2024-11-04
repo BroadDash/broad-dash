@@ -1,6 +1,4 @@
-import { ClientForm } from "@/components/ClientForm";
 import { Button } from "@/components/ui/button";
-
 import { Separator } from "@/components/ui/separator";
 
 import { Payment, columns } from "./columns";
@@ -308,7 +306,9 @@ export default async function DashboardPage() {
     <div className="w-screen">
       <div className="mx-6 flex h-16 items-center justify-between">
         <h1 className="text-lg font-semibold">Clients</h1>
-        <ClientForm />
+        <Button className="text-sm" size="sm">
+          Create client
+        </Button>
       </div>
       <Separator />
       <div className="">
